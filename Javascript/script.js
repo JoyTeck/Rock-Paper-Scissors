@@ -41,26 +41,35 @@ console.log(greeting);
 //ENDIF
 //END
 
-function playRockPaperScissors(humanChoice, computerChoice) {
-  humanChoice = ["Rock", "Paper", "Scissors"];
+const readline = require("readline");
 
-  const humanChoice = prompt("Choose Rock, Paper, or Scissors").trim();
-  const randomNumber = Math.floor(Math.random() * 3);
-  const computerChoice = choices[randomNumber];
+function playRockPaperScissors() {
+  const choices = ["Rock", "Paper", "Scissors"];
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
 
-  alert("humanChoice " + computerChoice);
+  rl.question("Choose Rock, Paper, or Scissors: ", (userChoice) => {
+    humanChoice = userChoice.trim();
+    const randomNumber = Math.floor(Math.random() * 3);
+    const computerChoice = choices[randomNumber];
 
-  if (humanChoice === computerChoice) {
-    alert("It's a Tie!");
-  } else if (
-    (humanChoice === "Rock" && computerChoice === "Scissors") ||
-    (humanChoice === "Paper" && computerChoice === "Rock") ||
-    (humanChoice === "Scissors" && computerChoice === "Paper")
-  ) {
-    alert("You Win!");
-  } else {
-    alert("You Lose!");
-  }
+    console.log("Computer chose " + computerChoice);
+
+    if (humanChoice === computerChoice) {
+      console.log("It's a Tie!");
+    } else if (
+      (humanChoice === "Rock" && computerChoice === "Scissors") ||
+      (humanChoice === "Paper" && computerChoice === "Rock") ||
+      (humanChoice === "Scissors" && computerChoice === "Paper")
+    ) {
+      console.log("You Win!");
+    } else {
+      console.log("You Lose!");
+    }
+    rl.close();
+  });
 }
 
-playRockPaperScissors(humanChoice, computerChoice);
+playRockPaperScissors();
